@@ -1,0 +1,114 @@
+{
+  "openapi": "3.0.0",
+  "info":
+  {
+    "version": "1.0.0",
+    "title": "API",
+    "description": "API für die Angular Anwendung"
+  },
+  "servers":
+  [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths":
+  {
+    "/login":
+    {
+      "post":
+      {
+        "summary": "Benutzeranmeldung",
+        "description": "Benutzeranmeldung mit E-Mail und Passwort",
+        "requestBody":
+        {
+          "content":
+          {
+            "application/json":
+            {
+              "schema":
+              {
+                "type": "object",
+                "properties":
+                {
+                  "email":
+                  {
+                    "type": "string"
+                  },
+                  "password":
+                  {
+                    "type": "string"
+                  },
+                  "confirmPassword":
+                  {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password", "confirmPassword"]
+              }
+            }
+          }
+        },
+        "responses":
+        {
+          "200":
+          {
+            "description": "Anmeldung erfolgreich"
+          },
+          "400":
+          {
+            "description": "Fehlerhafte Anfrage"
+          }
+        }
+      }
+    },
+    "/signup":
+    {
+      "post":
+      {
+        "summary": "Benutzerregistrierung",
+        "description": "Benutzerregistrierung mit E-Mail und Passwort",
+        "requestBody":
+        {
+          "content":
+          {
+            "application/json":
+            {
+              "schema": {
+                "type": "object",
+                "properties":
+                {
+                  "email":
+                  {
+
+                    "type": "string"
+                  },
+                  "password":
+                  {
+                    "type": "string"
+                  },
+                  "confirmPassword":
+                  {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password", "confirmPassword"]
+              }
+            }
+          }
+        },
+        "responses":
+        {
+          "201":
+          {
+            "description": "Registrierung erfolgreich"
+          },
+          "400":
+          {
+            "description": "Fehlerhafte Anfrage"
+          }
+        }
+      }
+    }
+  }
+}

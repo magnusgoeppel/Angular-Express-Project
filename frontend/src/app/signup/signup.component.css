@@ -1,0 +1,55 @@
+.signup-form
+{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+mat-form-field, button
+{
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+mat-form-field
+{
+  height: 70px;
+
+}
+
+mat-form-field .mat-form-field-infix
+{
+  padding: 0.5em 0.75em;
+}
+
+button
+{
+  font-size: 1.2rem;
+}
+
+.output-container
+{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.register-link
+{
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+h1
+{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3f51b5;
+  margin-bottom: 1rem;
+  margin-top: 0.3rem;
+  text-align: center;
+}

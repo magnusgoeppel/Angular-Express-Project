@@ -1,0 +1,11 @@
+<div class="landing-page">
+    <h1>Willkommen zu einem fiktiven Spiel!</h1>
+    <p>Bitte wählen Sie eine der folgenden Optionen:</p>
+    <button (click)="sendHighscore()">Sende Highscore</button>
+
+    <h2>Highscores</h2>
+    <ul>
+        <li *ngFor="let highscore of highscores">{{highscore.username}}: {{highscore.score}}</li>
+    </ul>
+    <button (click)="logout()">Logout</button>
+</div>

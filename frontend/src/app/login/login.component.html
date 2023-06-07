@@ -1,0 +1,41 @@
+<div>
+  <h1>Login</h1>
+</div>
+<form [formGroup]="loginForm">
+  <div>
+  <mat-form-field appearance="outline">
+    <mat-label>Username (E-Mail-Adresse)</mat-label>
+    <input matInput type="email" formControlName="email" required>
+  </mat-form-field>
+  </div>
+
+  <div>
+  <mat-form-field appearance="outline">
+    <mat-label>Passwort</mat-label>
+    <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" required>
+    <mat-icon matSuffix (click)="showPassword = !showPassword">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </mat-form-field>
+  </div>
+
+  <div>
+  <mat-form-field appearance="outline">
+    <mat-label>Passwort bestätigen</mat-label>
+    <input matInput [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" required>
+    <mat-icon matSuffix (click)="showConfirmPassword = !showConfirmPassword">{{showConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit"(click)="login()">Login</button>
+</form>
+
+<div class="register-link">
+  <button mat-stroked-button color="primary" [routerLink]="['/signup']">Zur Registrierung</button>
+</div>
+
+
+<div class="output-container" *ngIf="isLoggedIn">
+  <div>E-Mail: {{ loginForm.controls.email.value }}</div>
+  <div>Passwort: {{ loginForm.controls.password.value }}</div>
+  <div>Passwort bestätigen: {{ loginForm.controls.confirmPassword.value }}</div>
+</div>
+
