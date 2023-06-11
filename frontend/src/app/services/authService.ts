@@ -17,11 +17,12 @@ export class AuthService {
         this.currentToken = this.currentTokenSubject.asObservable();
     }
 
-    signUp(username: string, password: string): Observable<any>
+    signUp(email: string, password: string, company: string, address: string, postalCode: string): Observable<any>
     {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post(this.apiUrl, { username, password }, { headers });
+        return this.http.post(this.apiUrl, { username: email, password, company, address, plz: postalCode }, { headers });
     }
+
 
     private currentUsername: string | null = null;
     private currentAuthToken: string | null = null;
@@ -45,19 +46,11 @@ export class AuthService {
         return this.currentUsername;
     }
 
-    setAuthToken(token: string)
-    {
-        this.currentAuthToken = token;
-    }
-
 
 
     getAuthToken(): string | null {
         return this.currentAuthToken;
     }
-
-
-
 
     login(email: string, password: string): Observable<any> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -65,8 +58,6 @@ export class AuthService {
             tap(() => this.isLoggedIn = true)
         );
     }
-
-
 
     getHighscores() {
         return this.http.get<any[]>('http://localhost:3000/highscores');
@@ -91,8 +82,6 @@ export class AuthService {
             })
         );
     }
-
-
 
     setIsLoggedIn(isLoggedIn: boolean)
     {

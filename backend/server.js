@@ -15,56 +15,29 @@ mongoose.connect('mongodb://127.0.0.1:27017/testdb', { useNewUrlParser: true, us
     .then(() => console.log('Connection zu MongoDB erfolgreich...'))
     .catch(err => console.error('Connection zu MongoDB fehlgeschlagen ...', err));
 
-// Neuer Highscore-Eintrag
-const highScore = new HighScore({ username: 'test', score: 123 });
-
-// Speichern in der Datenbank
-highScore.save()
-    .then(doc =>
-    {
-        console.log('Dokument erfolgreich in Collection highscores gespeichert:', doc);
-    })
-    .catch(err => {
-
-        console.error('Error beim Speichern des Highscores des Dokuments:', err);
-    });
-
-let testUser = new User(
-    {
-    email: 'test@example.com',
-    password: 'password',
-    company: 'FH Technikum Wien',
-    address: 'Musterstraße 123',
-    plz: '12345'
-});
-
-testUser.save()
-    .then(doc => {
-        console.log('Dokument erfolgreich in collection Users gespeichert:', doc);
-    })
-    .catch(err => {
-        console.error('Error beim Speichern des Users des Dokuments:', err);
-    });
-
 User.find()
     .then(users =>
     {
         console.log(users);
     })
-    .catch(err => {
+    .catch(err =>
+    {
         console.error('Fehler beim Abrufen des Users', err);
     });
 
-// Die in-memory Datenbank
-const usersDb = {};
+HighScore.find()
+    .then(highscores =>
+    {
+        console.log(highscores);
+    })
+    .catch(err =>
+    {
+        console.log('Fehler beim Abrufen der Highscores', err);
+    });
+
+
 // Die authentifizierungstokens speichern
 const authTokens = {};
-
-// Funktion zur Erzeugung eines zufälligen Authentifizierungstokens
-function generateAuthToken()
-{
-    return Math.random().toString(36).substr(2);
-}
 
 app.get('/', (req, res) =>
 {
@@ -73,45 +46,54 @@ app.get('/', (req, res) =>
 
 app.post('/users', (req, res) =>
 {
-    const { username, password } = req.body;
+    console.log(req.body);  // Fügen Sie diese Zeile hinzu
 
-    if (usersDb[username])
-    {
-        // Der Benutzername ist bereits in der Datenbank vorhanden
-        res.status(409).json({ message: 'Benutzername bereits vorhanden' });
-    }
-    else
-    {
-        // Speichern Sie den neuen Benutzernamen und das Passwort in der Datenbank
-        usersDb[username] = password;
+    const { username, password, company, address, plz } = req.body;
 
-        // Generieren und speichern Sie das Authentifizierungstoken
-        const authToken = generateAuthToken();
-        authTokens[username] = authToken;
+    const user = new User({ username, password, company, address, plz });
 
-        res.status(201).json(
-            {
-            message: 'Benutzer erfolgreich erstellt',
-            username, password, authToken
+    user.save()
+        .then(doc => {
+            console.log('User-Dokument erfolgreich in MongoDB gespeichert:', doc);
+            res.status(201).json({ message: 'User erfolgreich erstellt', doc });
+        })
+        .catch(err => {
+            console.error('Fehler beim Speichern des User-Dokuments in MongoDB:', err);
+            res.status(500).json({ message: 'Fehler beim Erstellen des Users', err });
         });
-    }
 });
 
-// Erstellen Sie ein Array, um die Highscores zu speichern.
-let highscores = [];
 
 app.post('/highscores', (req, res) =>
 {
     const { username, score } = req.body;
-    highscores.push({ username, score });
-    res.status(201).json({ message: 'Punktzahl erfolgreich hinzugefügt', username, score });
+
+    const highScore = new HighScore({ username, score });
+
+    highScore.save()
+        .then(doc =>
+        {
+            console.log('Highscore-Dokument erfolgreich in MongoDB gespeichert:', doc);
+            res.status(201).json({ message: 'Highscore erfolgreich hinzugefügt', doc });
+        })
+        .catch(err =>
+        {
+            console.error('Fehler beim Speichern des Highscore-Dokuments in MongoDB:', err);
+            res.status(500).json({ message: 'Fehler beim Speichern des Highscores', err });
+        });
 });
 
 app.get('/highscores', (req, res) => {
-    // Antwort mit den Highscores senden
-
-    res.status(200).json(highscores);
+    HighScore.find().sort({ score: -1 }) // sortiert die Highscores in absteigender Reihenfolge
+        .then(highscores => {
+            res.status(200).json(highscores);
+        })
+        .catch(err => {
+            console.error('Fehler beim Abrufen der Highscores', err);
+            res.status(500).json({ message: 'Fehler beim Abrufen der Highscores', err });
+        });
 });
+
 
 app.delete('/sessions/:username', (req, res) =>
 {

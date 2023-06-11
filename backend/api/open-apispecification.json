@@ -1,4 +1,6 @@
+
 {
+  "_comment": "Die OpenAPI Spezifikation wird nicht benötigt, da die API von Express verwendet wird.",
   "openapi": "3.0.0",
   "info":
   {

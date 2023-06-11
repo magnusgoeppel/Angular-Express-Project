@@ -63,9 +63,13 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  signUpRequest(username: string, password: string)
+  signUpRequest(email: string, password: string)
   {
-    this.authService.signUp(username, password).pipe(
+    const company = this.signupForm.get('company')!.value;
+    const address = this.signupForm.get('address')!.value;
+    const postalCode = this.signupForm.get('postalCode')!.value;
+
+    this.authService.signUp(email, password, company, address, postalCode).pipe(
         catchError(error => {
           console.error('Registrierung fehlgeschlagen', error);
           return throwError(error);
@@ -74,4 +78,5 @@ export class SignUpComponent implements OnInit {
       console.log('Registrierung erfolgreich.', response);
     });
   }
+
 }
