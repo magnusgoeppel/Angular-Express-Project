@@ -32,7 +32,7 @@ Starten Sie den MongoDB-Dienst auf Ihrem System.
 Starten Sie den Backend-Server:
 
 ```bash
-npm start
+node server.js
 ```
 
 ### Frontend
