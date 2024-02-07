@@ -1,4 +1,4 @@
-# Angular-Express.js-Projekt
+# Angular-Express-Projekt
 
 Dieses Projekt beinhaltet eine einfache Anwendung mit Benutzerregistrierung, Login, Anzeige von Highscores und der Möglichkeit, Highscores zu senden. Es besteht aus einem Angular-Frontend und einem Express-Backend, das eine MongoDB-Datenbank verwendet.
 
