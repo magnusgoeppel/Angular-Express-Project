@@ -1,15 +1,14 @@
-# Angular-Express-Projekt
+# Angular-Express Project
 
-Dieses Projekt beinhaltet eine einfache Anwendung mit Benutzerregistrierung, Login, Anzeige von Highscores und der Möglichkeit, Highscores zu senden. Es besteht aus einem Angular-Frontend und einem Express-Backend, das eine MongoDB-Datenbank verwendet.
+This project includes a simple application with user registration, login, display of high scores, and the ability to submit high scores. It consists of an Angular frontend and an Express backend using a MongoDB database.
 
-## Struktur
-Das Projekt ist in zwei Hauptverzeichnisse unterteilt:
+## Structure
+The project is divided into two main directories:
 
-- frontend/: Enthält den Angular-basierten Frontend-Code.
-- backend/: Enthält den Express- und Mongoose-basierten Backend-Code.
+- `frontend/`: Contains the Angular-based frontend code.
+- `backend/`: Contains the Express and Mongoose-based backend code.
 
-
-## Voraussetzungen
+## Prerequisites
 
 - Node.js
 - Angular CLI
@@ -17,51 +16,56 @@ Das Projekt ist in zwei Hauptverzeichnisse unterteilt:
 
 ## Installation
 ### Backend
-Navigieren Sie in das backend/ Verzeichnis:
+Navigate to the `backend/` directory:
 
 ```bash
 cd backend 
 ```
-Installieren Sie die erforderlichen npm-Pakete:
+
+Install the required npm packages:
 
 ```bash
 npm install
 ```
-Starten Sie den MongoDB-Dienst auf Ihrem System.
 
-Starten Sie den Backend-Server:
+Start the MongoDB service on your system.
+
+Start the backend server:
 
 ```bash
 node server.js
 ```
 
 ### Frontend
-Navigieren Sie in das frontend/ Verzeichnis:
+Navigate to the `frontend/` directory:
 
 ```bash
 cd ../frontend
 ```
-Installieren Sie die erforderlichen npm-Pakete:
+
+Install the required npm packages:
 
 ```bash
 npm install
 ```
-Starten Sie die Angular-Anwendung:
+
+Start the Angular application:
 
 ```bash
 ng serve
 ```
-Öffnen Sie einen Webbrowser und navigieren Sie zu http://localhost:4200, um die Anwendung zu verwenden.
 
-## Funktionalitäten
-- Benutzerregistrierung: Erlaubt es neuen Benutzern, sich mit E-Mail, Passwort und optionalen Zusatzinformationen zu registrieren.
-- Login/Logout: Benutzer können sich einloggen und ausloggen. Beim Login werden Benutzerinformationen und Authentifizierungstokens verwaltet.
-- Highscore-Anzeige und -Sendung: Authentifizierte Benutzer können ihre Highscores senden und eine Liste der Highscores aller Benutzer anzeigen.
+Open a web browser and navigate to [http://localhost:4200](http://localhost:4200) to use the application.
 
-## API-Endpunkte
-Das Backend stellt verschiedene Endpunkte zur Verfügung, darunter:
+## Features
+- **User Registration**: Allows new users to register with an email, password, and optional additional information.
+- **Login/Logout**: Users can log in and out. User information and authentication tokens are managed during login.
+- **High Score Display and Submission**: Authenticated users can submit their high scores and view a list of all users' high scores.
 
-- POST /users: Registriert einen neuen Benutzer.
-- POST /highscores: Fügt einen neuen Highscore hinzu.
-- GET /highscores: Listet alle Highscores auf.
-- DELETE /sessions/:username: Meldet einen Benutzer ab und löscht das Authentifizierungstoken.
+## API Endpoints
+The backend provides various endpoints, including:
+
+- **POST /users**: Registers a new user.
+- **POST /highscores**: Adds a new high score.
+- **GET /highscores**: Lists all high scores.
+- **DELETE /sessions/:username**: Logs out a user and deletes the authentication token.
