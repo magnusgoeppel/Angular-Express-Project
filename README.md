@@ -1,4 +1,4 @@
-# Angular-Express Project
+# High Score Tracker
 
 This project includes a simple application with user registration, login, display of high scores, and the ability to submit high scores. It consists of an Angular frontend and an Express backend using a MongoDB database.
 
